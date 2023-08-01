@@ -2,10 +2,13 @@ import express, { Request, Response } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import morgan from "morgan";
-
+import dotenv from "dotenv";
+import { dbConnection } from "./config/db_connection";
 import router from "./routes/route";
 
-const PORT = process.env.API_PORT || 4242;
+dotenv.config();
+
+const PORT = process.env.PORT || 4242;
 const app = express();
 
 app.use(morgan("dev"));
@@ -33,3 +36,16 @@ app.all("*", (req: Request, res: Response) => {
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+// Check database connection
+dbConnection.connect(function (err) {
+  if (err) throw err;
+  console.log("Connected to database!");
+});
+dbConnection.query(
+  "CREATE DATABASE IF NOT EXISTS all_my_lists;",
+  (err: any, result: any) => {
+    console.log("err: ", err);
+    console.log("result: ", result);
+  }
+);
