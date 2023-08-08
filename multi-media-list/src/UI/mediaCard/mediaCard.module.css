@@ -1,0 +1,42 @@
+.imageContainer {
+  width: 10%;
+  position: relative;
+  border-radius: 5px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  overflow: hidden;
+  margin-left: 1%;
+  display: inline-block;
+  .image {
+    width: 100%;
+    height: unset;
+    object-fit: contain;
+    position: relative;
+    transition: transform 0.5s ease;
+    border-radius: 5px;
+  }
+
+  .title {
+    color: white;
+    position: absolute;
+    bottom: 50%;
+    left: 5%;
+    width: 90%;
+    opacity: 0;
+    font-weight: bold;
+    text-align: center;
+    font-size: clamp(12px, 2vw, 1rem);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}
+
+.imageContainer:hover {
+  .image {
+    filter: brightness(50%);
+  }
+  .title {
+    opacity: 1;
+  }
+}

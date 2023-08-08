@@ -1,0 +1,20 @@
+.rowContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 2%;
+
+  .rowName {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .row {
+    overflow-x: hidden;
+    margin-bottom: 20px;
+    white-space: nowrap;
+    display: flex;
+    flex-wrap: wrap;
+  }
+}

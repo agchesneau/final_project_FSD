@@ -1,0 +1,17 @@
+.button {
+  position: inherit;
+  width: 10%;
+  height: 5%;
+  background-color: #3c145c;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  font-size: 1rem;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+.button:hover {
+  filter: brightness(80%);
+}

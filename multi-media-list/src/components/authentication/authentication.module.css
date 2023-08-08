@@ -1,0 +1,43 @@
+.container {
+  display: flex;
+  width: 60%;
+  flex-direction: column;
+  justify-content: center;
+
+  height: 100vh;
+  .optionsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .text {
+    font-size: 2rem;
+
+    color: grey;
+    cursor: pointer;
+  }
+  .selectedText {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+  .button {
+    width: 50%;
+    height: 10%;
+    align-self: center;
+    background-color: #9a1737;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    outline: none;
+    font-size: 2rem;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+  }
+  .error {
+    width: 100%;
+    height: 5%;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10%;
+  }
+}

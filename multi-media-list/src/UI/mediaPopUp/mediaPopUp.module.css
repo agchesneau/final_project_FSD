@@ -1,0 +1,89 @@
+.popup {
+  background-color: #19012c;
+  position: absolute;
+  left: 30%;
+  top: 30%;
+  bottom: auto;
+  right: auto;
+  width: 40%;
+  height: auto;
+
+  .modalHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    .closeIcon {
+      margin: 2%;
+      width: 2rem;
+      cursor: pointer;
+    }
+  }
+  .popupContent {
+    margin-left: 5%;
+    margin-right: 5%;
+    color: white;
+    margin-bottom: 10%;
+    .title {
+      font-size: 2rem;
+    }
+    .laterButton {
+      margin-top: 2%;
+      margin-left: 2%;
+    }
+    .completionText {
+      margin-top: 2%;
+      margin-bottom: 4%;
+    }
+    .logContainer {
+      display: flex;
+      flex-direction: column;
+      .logLine {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 2%;
+        .statusContainer {
+          margin-left: 30%;
+          display: inline-flex;
+          flex-direction: row;
+          justify-content: space-evenly;
+          gap: 25%;
+          align-items: center;
+          align-content: center;
+          .selectedStatus {
+            font-weight: bold;
+            width: 40%;
+            color: #ee1e50;
+          }
+          .status {
+            width: 40%;
+            cursor: pointer;
+            filter: brightness(40%);
+          }
+        }
+      }
+      .dateLine {
+        display: flex;
+        flex-direction: row;
+        .on {
+          margin-left: 5%;
+        }
+        .completionDate {
+          margin-left: 5%;
+          font-weight: bold;
+          color: #ee1e50;
+        }
+      }
+      .saveButton {
+        background-color: #9a1737;
+        font-size: large;
+        margin: 5%;
+        width: 20%;
+        height: 2.5rem;
+        align-self: center;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+      }
+    }
+  }
+}

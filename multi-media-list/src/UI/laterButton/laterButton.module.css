@@ -1,0 +1,22 @@
+.container {
+  position: relative;
+  width: 15%;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  .on {
+    width: 80%;
+    height: unset;
+    object-fit: contain;
+    position: relative;
+    transition: transform 0.5s ease;
+  }
+  .off {
+    width: 80%;
+    height: unset;
+    object-fit: contain;
+    position: relative;
+    transition: transform 0.5s ease;
+    filter: opacity(0.3);
+  }
+}

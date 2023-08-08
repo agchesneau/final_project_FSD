@@ -8,7 +8,7 @@ const dbConfig = {
   password: process.env.DB_PASS,
 };
 
-export const dbConnection = await mysql.createConnection({
+export default mysql.createConnection({
   host: "localhost",
   user: dbConfig.user,
   password: dbConfig.password,

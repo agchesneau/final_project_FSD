@@ -1,10 +1,9 @@
 import express, { Request, Response } from "express";
-import bodyParser from "body-parser";
 import cors from "cors";
 import morgan from "morgan";
 import dotenv from "dotenv";
-import { dbConnection } from "./config/db_connection";
-import router from "./routes/route";
+import dbConnection from "./config/db_connection";
+import router from "./routes/routes";
 
 dotenv.config();
 
@@ -13,6 +12,8 @@ const app = express();
 
 app.use(morgan("dev"));
 app.use(express.static("build"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 const corsOptions = {
   origin: "http://localhost:3000",
@@ -21,10 +22,6 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json({ limit: "5000mb" }));
-
-app.use(express.json());
 app.use("/api", router);
 
 app.all("*", (req: Request, res: Response) => {
@@ -38,14 +35,11 @@ app.listen(PORT, () => {
 });
 
 // Check database connection
-dbConnection.connect(function (err) {
-  if (err) throw err;
-  console.log("Connected to database!");
-});
-dbConnection.query(
-  "CREATE DATABASE IF NOT EXISTS all_my_lists;",
-  (err: any, result: any) => {
-    console.log("err: ", err);
-    console.log("result: ", result);
+const connection = async () => {
+  try {
+    (await dbConnection).connect();
+  } catch (err) {
+    console.log("db connection err: ", err);
   }
-);
+};
+connection();
