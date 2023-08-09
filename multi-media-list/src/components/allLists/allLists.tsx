@@ -4,6 +4,7 @@ import { createContext, useEffect, useState } from "react";
 import LogOutButton from "@/UI/logOutButton/logOutButton";
 import { logout } from "@/models/UserModel";
 import styles from "./allLists.module.css";
+import AddMedia from "@/UI/addMedia/addMedia";
 
 const ErrorContext = createContext({ error: false, message: "" });
 

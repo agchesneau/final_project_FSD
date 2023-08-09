@@ -7,7 +7,7 @@ import {
 } from "../models/diaryModel";
 
 const addEntryController = async (req: Request, res: Response) => {
-  const { mediaID, event, notes } = req.body;
+  const { mediaID, event, notes, entryDate } = req.body;
   const userID = res.locals.decoded.id;
 
   try {
@@ -16,7 +16,9 @@ const addEntryController = async (req: Request, res: Response) => {
       mediaID,
       event,
       notes,
+      entryDate,
     });
+    console.log(result);
     if (result[0].affectedRows === 1) {
       res.status(200).json({ message: "Media added successfully" });
     } else {
@@ -30,7 +32,7 @@ const addEntryController = async (req: Request, res: Response) => {
 };
 
 const updateEntryController = async (req: Request, res: Response) => {
-  const { mediaID, event, notes } = req.body;
+  const { mediaID, event, notes, entryDate } = req.body;
   const userID = res.locals.decoded.id;
 
   try {
@@ -39,6 +41,7 @@ const updateEntryController = async (req: Request, res: Response) => {
       mediaID,
       event,
       notes,
+      entryDate,
     });
     if (result[0].affectedRows === 1) {
       res.status(200).json({ message: "Entry updated successfully" });

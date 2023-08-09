@@ -10,7 +10,7 @@ export default function MediaRow({
   rowName,
 }: {
   list: Media[];
-  rowName: string;
+  rowName: "Up Next" | "Started" | "Finished";
 }) {
   const [showDescription, setShowDescription] = useState(false);
   const [mediaID, setMediaID] = useState<number | null>(null);
@@ -18,6 +18,7 @@ export default function MediaRow({
     setMediaID(id);
     setShowDescription(true);
   };
+  const [visible, setVisible] = useState(false);
   return (
     <div className={styles.rowContainer}>
       <h2 className={styles.rowName}>{rowName}</h2>
@@ -34,12 +35,12 @@ export default function MediaRow({
         {list.map((media) => (
           <MediaCard
             media={media}
-            key={media.id}
+            key={media.mediaID}
             onClickMedia={handleClickMedia}
           />
         ))}
-        <AddMedia onClick={() => {}} />
       </div>
+      <AddMedia rowName={rowName} />
     </div>
   );
 }

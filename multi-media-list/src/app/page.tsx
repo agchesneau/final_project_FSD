@@ -21,7 +21,6 @@ export default function Home() {
   const [loggedIn, setLoggedIn] = useState(false);
   const checkUser = async () => {
     const res = await getUser();
-    console.log(res);
     res === "user logged in" ? setLoggedIn(true) : setLoggedIn(false);
   };
   useEffect(() => {

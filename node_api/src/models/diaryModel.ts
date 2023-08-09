@@ -16,8 +16,7 @@ const insertDiaryEntry = async (entry: DiaryEntryFeatures) => {
   const result = await (
     await dbConnection
   ).execute(
-    `INSERT INTO all_my_lists.history (userID, mediaID, entry_date, event, notes) VALUES ('${entry.userID}', '${entry.mediaID}', ${entry.entryDate},
-        '${entry.event}', '${entry.notes}');`
+    `INSERT INTO all_my_lists.history (userID, mediaID, entry_date, event, notes) VALUES (${entry.userID}, ${entry.mediaID}, '${entry.entryDate}', '${entry.event}', '${entry.notes}');`
   );
 
   return result[0] as ResultSetHeader[];
@@ -27,7 +26,7 @@ const updateDiaryEntry = async (entry: DiaryEntryFeatures) => {
   const result = await (
     await dbConnection
   ).execute(
-    `UPDATE all_my_lists.history SET userID = '${entry.userID}', mediaID = '${entry.mediaID}', entry_date =${entry.entryDate}, event = '${entry.event}', notes = '${entry.notes}' WHERE diaryID = ${entry.userID};`
+    `UPDATE all_my_lists.history SET userID = ${entry.userID}, mediaID = ${entry.mediaID}, entry_date ='${entry.entryDate}', event = '${entry.event}', notes = '${entry.notes}' WHERE diaryID = ${entry.userID};`
   );
   return result[0] as ResultSetHeader[];
 };

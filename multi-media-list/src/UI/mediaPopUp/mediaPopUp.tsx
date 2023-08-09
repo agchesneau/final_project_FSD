@@ -3,7 +3,11 @@ import ReactModal from "react-modal";
 import styles from "./mediaPopUp.module.css";
 import Image from "next/image";
 import LaterButton from "../laterButton/laterButton";
-import { useState } from "react";
+import React, { useState } from "react";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import DiaryEntry from "../diaryEntry/diaryEntry";
 
 export default function MediaPopup({
   mediaID,
@@ -22,10 +26,32 @@ export default function MediaPopup({
     name: "Drive",
     type: "movie",
   };
+  const [newEntry, setNewEntry] = useState<Diary>({
+    mediaID,
+    event: "",
+    entryDate: "",
+    notes: "",
+  });
+
+  const handleSave = () => {
+    console.log(newEntry);
+  };
   const [inList, setInList] = useState(false);
-  const diaryEntrie = [
-    { id: 1, event: "started", date: new Date(), notes: "" },
-    { id: 2, event: "completed", date: new Date(), notes: "great!!" },
+  const diaryEntry = [
+    {
+      id: 1,
+      mediaID: 1,
+      event: "started",
+      entryDate: new Date().toDateString(),
+      notes: "great movie",
+    },
+    {
+      id: 2,
+      mediaID: 2,
+      event: "completed",
+      entryDate: new Date().toDateString(),
+      notes: "great!!",
+    },
   ];
   const lastDiaryEntry = { event: "started", date: new Date(), notes: "" };
   const date = lastDiaryEntry.date.toDateString();
@@ -35,7 +61,7 @@ export default function MediaPopup({
 
   return (
     <div className={styles.container}>
-      <ReactModal isOpen={isOpen} className={styles.popup} preventScroll>
+      <ReactModal isOpen={isOpen} className={styles.popup}>
         <div className={styles.modalHeader}>
           <Image
             src="closeIcon.svg"
@@ -96,20 +122,31 @@ export default function MediaPopup({
               </div>
               <div className={styles.dateLine}>
                 <p className={styles.on}>on</p>
-
-                <p className={styles.completionDate}>{dateLog}</p>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DatePicker
+                    format="DD/MM/YYYY"
+                    className={styles.completionDate}
+                    value={newEntry.entryDate}
+                    onChange={(newValue) =>
+                      setNewEntry({ ...newEntry, entryDate: newValue || "" })
+                    }
+                  />
+                </LocalizationProvider>
               </div>
-              <button className={styles.saveButton}>save</button>
+              <button className={styles.saveButton} onClick={handleSave}>
+                save
+              </button>
             </div>
           </div>
-          {diaryEntrie.length > 0 && (
+          {diaryEntry.length > 0 && (
             <div className={styles.diaryEntries}>
-              {diaryEntrie.map((entry) => (
-                <div className={styles.diaryEntry} key={entry.id}>
-                  <p>{entry.event}</p>
-                  <p>{entry.date.toLocaleDateString()}</p>
-                  <p>{entry.notes}</p>
-                </div>
+              {diaryEntry.map((entry) => (
+                <DiaryEntry
+                  key={entry.id}
+                  entry={entry}
+                  setEntry={setNewEntry}
+                  onClick={() => console.log("delete")}
+                />
               ))}
             </div>
           )}

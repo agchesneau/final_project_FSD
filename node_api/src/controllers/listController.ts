@@ -8,7 +8,6 @@ import {
 const addListEntryController = async (req: Request, res: Response) => {
   const { mediaID } = req.body;
   const userID = res.locals.decoded.id;
-
   try {
     const result = await insertListEntry({
       userID,

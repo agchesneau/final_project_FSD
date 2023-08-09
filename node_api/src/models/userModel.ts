@@ -65,7 +65,6 @@ const UserLogin = async (username: string, password: string) => {
       return token;
     }
   } catch (err) {
-    console.log("err", err);
     return "";
   }
 };

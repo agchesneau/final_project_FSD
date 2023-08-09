@@ -1,11 +1,11 @@
 .popup {
   background-color: #19012c;
   position: absolute;
-  left: 30%;
-  top: 30%;
+  left: 20%;
+  top: 10%;
   bottom: auto;
   right: auto;
-  width: 40%;
+  width: 60%;
   height: auto;
 
   .modalHeader {
@@ -29,6 +29,7 @@
     .laterButton {
       margin-top: 2%;
       margin-left: 2%;
+      width: 50%;
     }
     .completionText {
       margin-top: 2%;
@@ -64,13 +65,14 @@
       .dateLine {
         display: flex;
         flex-direction: row;
+        align-items: center;
         .on {
           margin-left: 5%;
         }
         .completionDate {
           margin-left: 5%;
-          font-weight: bold;
-          color: #ee1e50;
+
+          background-color: #ffffff;
         }
       }
       .saveButton {
@@ -79,7 +81,7 @@
         margin: 5%;
         width: 20%;
         height: 2.5rem;
-        align-self: center;
+        margin-left: 25%;
         border-radius: 5px;
         border: none;
         cursor: pointer;

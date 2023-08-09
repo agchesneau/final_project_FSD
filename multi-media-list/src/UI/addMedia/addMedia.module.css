@@ -1,0 +1,32 @@
+.container {
+  /* width: 100%; */
+  display: flex;
+  /* justify-content: flex-start; */
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 5%;
+
+  .searchContainer {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: flex-start; */
+    /* align-items: flex-start; */
+
+    .addMedia {
+      height: 100%;
+    }
+    .searchResult {
+      display: flex;
+      flex-direction: row;
+      .result {
+        cursor: pointer;
+        .title {
+          color: white;
+        }
+        .type {
+          color: #9a1737;
+        }
+      }
+    }
+  }
+}

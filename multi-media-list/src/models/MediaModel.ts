@@ -4,12 +4,28 @@ import { getAuthToken } from "@/utils/cookies";
 
 const token = getAuthToken();
 
-export const getMediaByID = async (id: number) => {
+export const getMediaByID = async (mediaID: number) => {
   const response = (await connection(
     "get",
-    `media/id${id}`,
+    `media/id${mediaID}`,
     {
-      id,
+      mediaID,
+    },
+    token
+  )) as AxiosResponse;
+  if (response.status === 200) {
+    return response.data;
+  } else {
+    throw new Error("Error");
+  }
+};
+
+export const getMediaByName = async (name: string) => {
+  const response = (await connection(
+    "get",
+    `media/name/${name}`,
+    {
+      name,
     },
     token
   )) as AxiosResponse;

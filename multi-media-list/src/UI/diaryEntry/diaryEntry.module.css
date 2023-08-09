@@ -1,0 +1,17 @@
+.entry {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5%;
+  .title {
+  }
+  .event {
+  }
+  .notes {
+  }
+
+  .icon {
+    width: 5%;
+    cursor: pointer;
+  }
+}
