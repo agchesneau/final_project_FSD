@@ -29,11 +29,7 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      {!loggedIn ? (
-        <Authentication />
-      ) : (
-        <AllLists upNext={list} started={list} finished={list} />
-      )}
+      {!loggedIn ? <Authentication /> : <AllLists />}
     </main>
   );
 }
