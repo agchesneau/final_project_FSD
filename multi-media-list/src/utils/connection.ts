@@ -7,7 +7,12 @@ export const connection = async (
   token?: string
 ) => {
   try {
-    const headers = token ? { Authorization: `Bearer ${token}` } : {};
+    const headers = token
+      ? {
+          Authorization: `Bearer ${token}`,
+          "content-type": "application/x-www-form-urlencoded",
+        }
+      : {};
     const response = await axios({
       method: method,
       url: `${baseUrl}/api/${endpoint}`,

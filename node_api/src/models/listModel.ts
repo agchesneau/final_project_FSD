@@ -14,8 +14,7 @@ const insertListEntry = async (entry: ListFeatures) => {
   const result = await (
     await dbConnection
   ).execute(
-    `INSERT INTO all_my_lists.nextlist (mediaID, userID, archived) VALUES (${entry.mediaID}, ${entry.userID}, 
-            ${entry.archived});`
+    `INSERT INTO all_my_lists.nextlist (mediaID, userID, archived) VALUES (${entry.mediaID}, ${entry.userID}, ${entry.archived});`
   );
   return result[0] as ResultSetHeader[];
 };

@@ -25,7 +25,6 @@ export const postDiary = async (
   if (response.status === 200) {
     return "success";
   } else {
-    console.log(response);
     throw new Error("Error");
   }
 };
@@ -45,7 +44,7 @@ export const updateDiary = async (
       mediaID,
       event,
       notes,
-      entryDate,
+      entryDate: entryDate,
     },
     token
   )) as AxiosResponse;

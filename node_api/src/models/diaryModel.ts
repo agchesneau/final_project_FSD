@@ -22,11 +22,11 @@ const insertDiaryEntry = async (entry: DiaryEntryFeatures) => {
   return result[0] as ResultSetHeader[];
 };
 
-const updateDiaryEntry = async (entry: DiaryEntryFeatures) => {
+const updateDiaryEntry = async (entry: DiaryEntry) => {
   const result = await (
     await dbConnection
   ).execute(
-    `UPDATE all_my_lists.history SET userID = ${entry.userID}, mediaID = ${entry.mediaID}, entry_date ='${entry.entryDate}', event = '${entry.event}', notes = '${entry.notes}' WHERE diaryID = ${entry.userID};`
+    `UPDATE all_my_lists.history SET userID = ${entry.userID}, mediaID = ${entry.mediaID}, entry_date ='${entry.entryDate}', event = '${entry.event}', notes = '${entry.notes}' WHERE logID = ${entry.logID};`
   );
   return result[0] as ResultSetHeader[];
 };

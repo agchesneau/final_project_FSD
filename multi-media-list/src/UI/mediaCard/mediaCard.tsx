@@ -10,10 +10,10 @@ export default function MediaCard({
   onClickMedia,
 }: {
   media: Media;
-  onClickMedia: (id: number) => void;
+  onClickMedia: (id: number, name: string) => void;
 }) {
   const handleClickMedia = () => {
-    onClickMedia(media.id);
+    media.mediaID ? onClickMedia(media.mediaID, media.name) : null;
   };
   return (
     <div className={styles.imageContainer}>

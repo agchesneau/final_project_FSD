@@ -7,7 +7,7 @@ const token = getAuthToken();
 export const getMediaByID = async (mediaID: number) => {
   const response = (await connection(
     "get",
-    `media/id${mediaID}`,
+    `media/id/${mediaID}`,
     {
       mediaID,
     },

@@ -4,6 +4,7 @@
   align-items: center;
   gap: 5%;
   .title {
+    font-size: medium;
   }
   .event {
   }
@@ -12,6 +13,7 @@
 
   .icon {
     width: 5%;
+    height: auto;
     cursor: pointer;
   }
 }

@@ -3,61 +3,61 @@ import ReactModal from "react-modal";
 import styles from "./mediaPopUp.module.css";
 import Image from "next/image";
 import LaterButton from "../laterButton/laterButton";
-import React, { useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import DiaryEntry from "../diaryEntry/diaryEntry";
+import { postDiary, updateDiary } from "@/models/DiaryModel";
+import dayjs from "dayjs";
 
 export default function MediaPopup({
   mediaID,
   onClose,
   rowName,
   isOpen,
+  title,
+  diaryEntries,
+  handleDelete,
+  saveChanges,
 }: {
   mediaID: number;
   onClose: () => void;
   rowName: string;
   isOpen: boolean;
+  title: string;
+  diaryEntries: Diary[];
+  handleDelete: (id: number) => void;
+  saveChanges: (entry: Diary) => void;
 }) {
-  //   const media = useMedia(mediaID);
-  const media = {
-    id: 1,
-    name: "Drive",
-    type: "movie",
-  };
   const [newEntry, setNewEntry] = useState<Diary>({
     mediaID,
     event: "",
     entryDate: "",
     notes: "",
   });
-
-  const handleSave = () => {
-    console.log(newEntry);
+  const updatedEntry: Diary = {
+    logID: 0,
+    mediaID,
+    event: "",
+    entryDate: "",
+    notes: "",
   };
-  const [inList, setInList] = useState(false);
-  const diaryEntry = [
-    {
-      id: 1,
-      mediaID: 1,
-      event: "started",
-      entryDate: new Date().toDateString(),
-      notes: "great movie",
-    },
-    {
-      id: 2,
-      mediaID: 2,
-      event: "completed",
-      entryDate: new Date().toDateString(),
-      notes: "great!!",
-    },
-  ];
-  const lastDiaryEntry = { event: "started", date: new Date(), notes: "" };
-  const date = lastDiaryEntry.date.toDateString();
-  const dateLog = new Date().toLocaleDateString();
-  const handleClickLater = () => setInList(!inList);
-  const [status, setStatus] = useState(lastDiaryEntry.event);
+
+  const handleSave = async () => {
+    try {
+      const res = await postDiary(
+        newEntry.mediaID,
+        status,
+        newEntry.notes,
+        dayjs(newEntry.entryDate).format("YYYY-MM-DD")
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const [status, setStatus] = useState("started");
 
   return (
     <div className={styles.container}>
@@ -73,51 +73,38 @@ export default function MediaPopup({
           />
         </div>
         <div className={styles.popupContent}>
-          <div className={styles.title}>{media.name}</div>
-          <div className={styles.laterButton}>
+          <div className={styles.title}>{title}</div>
+          {/* <div className={styles.laterButton}>
             <LaterButton onClick={handleClickLater} isOn={inList} />
-          </div>
+          </div> */}
           <div className={styles.lastDiaryEntry}>
-            {lastDiaryEntry.event === "started" && (
-              <div>
-                <p className={styles.completionText}>
-                  You started this on {date}
-                </p>
-              </div>
-            )}
             <div className={styles.logContainer}>
               <div className={styles.logLine}>
                 <p>Log as</p>
                 <div>
-                  {lastDiaryEntry.event === "started" ? (
-                    <div className={styles.statusContainer}>
-                      <p
-                        className={
-                          status === "started"
-                            ? styles.selectedStatus
-                            : styles.status
-                        }
-                        onClick={() => setStatus("started")}
-                      >
-                        started
-                      </p>
+                  <div className={styles.statusContainer}>
+                    <p
+                      className={
+                        status === "started"
+                          ? styles.selectedStatus
+                          : styles.status
+                      }
+                      onClick={() => setStatus("started")}
+                    >
+                      started
+                    </p>
 
-                      <p
-                        className={
-                          status === "completed"
-                            ? styles.selectedStatus
-                            : styles.status
-                        }
-                        onClick={() => setStatus("completed")}
-                      >
-                        completed
-                      </p>
-                    </div>
-                  ) : (
-                    <div>
-                      <p className={styles.selectedStatus}>completed</p>
-                    </div>
-                  )}
+                    <p
+                      className={
+                        status === "completed"
+                          ? styles.selectedStatus
+                          : styles.status
+                      }
+                      onClick={() => setStatus("completed")}
+                    >
+                      completed
+                    </p>
+                  </div>
                 </div>
               </div>
               <div className={styles.dateLine}>
@@ -138,14 +125,14 @@ export default function MediaPopup({
               </button>
             </div>
           </div>
-          {diaryEntry.length > 0 && (
+          {diaryEntries.length > 0 && (
             <div className={styles.diaryEntries}>
-              {diaryEntry.map((entry) => (
+              {diaryEntries.map((entry) => (
                 <DiaryEntry
-                  key={entry.id}
+                  key={entry.logID}
                   entry={entry}
-                  setEntry={setNewEntry}
-                  onClick={() => console.log("delete")}
+                  onClick={() => handleDelete(entry.logID)}
+                  saveChanges={saveChanges}
                 />
               ))}
             </div>

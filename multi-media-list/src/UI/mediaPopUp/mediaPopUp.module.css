@@ -15,6 +15,7 @@
     .closeIcon {
       margin: 2%;
       width: 2rem;
+      height: auto;
       cursor: pointer;
     }
   }

@@ -22,17 +22,14 @@ export default function AllLists() {
   useEffect(() => {
     const getNextElements = async () => {
       const res = await getNextList();
-      console.log(res);
       setUpNextList(res);
     };
     const getStartedElements = async () => {
       const res = await getStarted();
-      console.log(res);
       setStartedList(res);
     };
     const getFinishedElements = async () => {
       const res = await getCompleted();
-      console.log(res);
       setFinishedList(res);
     };
     getNextElements();

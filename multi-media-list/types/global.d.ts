@@ -10,10 +10,10 @@ declare global {
   }
 
   interface Diary {
-    id?: number;
+    logID?: number;
     mediaID: number;
     event: string;
-    entryDate: string;
+    entryDate: string | Date;
     notes: string;
   }
 }

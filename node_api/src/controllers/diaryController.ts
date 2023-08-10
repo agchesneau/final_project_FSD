@@ -18,13 +18,14 @@ const addEntryController = async (req: Request, res: Response) => {
       notes,
       entryDate,
     });
-    console.log(result);
+
     if (result[0].affectedRows === 1) {
       res.status(200).json({ message: "Media added successfully" });
     } else {
       res.status(400).json({ error: "Media not added" });
     }
   } catch (err) {
+    console.log(err);
     res.status(500).json({
       error: err.message,
     });
@@ -32,9 +33,8 @@ const addEntryController = async (req: Request, res: Response) => {
 };
 
 const updateEntryController = async (req: Request, res: Response) => {
-  const { mediaID, event, notes, entryDate } = req.body;
+  const { mediaID, event, notes, entryDate, logID } = req.body;
   const userID = res.locals.decoded.id;
-
   try {
     const result = await updateDiaryEntry({
       userID,
@@ -42,7 +42,9 @@ const updateEntryController = async (req: Request, res: Response) => {
       event,
       notes,
       entryDate,
+      logID,
     });
+
     if (result[0].affectedRows === 1) {
       res.status(200).json({ message: "Entry updated successfully" });
     } else {
@@ -76,9 +78,9 @@ const getStartedController = async (req: Request, res: Response) => {
   const userID = res.locals.decoded.id;
 
   try {
-    const resultStrted = await findDiaryEntryByEvent("started", userID);
+    const resultStarted = await findDiaryEntryByEvent("started", userID);
     const resultRestarted = await findDiaryEntryByEvent("restarted", userID);
-    const result = resultStrted.concat(resultRestarted);
+    const result = resultStarted.concat(resultRestarted);
     res.status(200).json(result);
   } catch (err) {
     res.status(500).json({

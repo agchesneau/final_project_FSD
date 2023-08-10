@@ -24,7 +24,6 @@ export default function AddMedia({
   const handleSearch = async () => {
     const res = await getMediaByName(title);
     setResult(res);
-    console.log(res);
   };
 
   useEffect(() => {

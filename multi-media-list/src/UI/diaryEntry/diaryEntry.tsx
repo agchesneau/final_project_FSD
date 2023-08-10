@@ -2,32 +2,45 @@
 import { useState } from "react";
 import styles from "./diaryEntry.module.css";
 import Image from "next/image";
+import dayjs from "dayjs";
 
 export default function DiaryEntry({
   entry,
-  setEntry,
+  saveChanges,
   onClick,
 }: {
   entry: Diary;
-  setEntry: (entry: Diary) => void;
+  saveChanges: (entry: Diary) => void;
   onClick: () => void;
 }) {
   const [newEntry, setnewEntry] = useState(entry);
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setnewEntry({ ...newEntry, notes: event.target.value });
-    setEntry({ ...newEntry, notes: event.target.value });
+    setnewEntry({
+      ...newEntry,
+      entryDate: newEntry.entryDate,
+      notes: event.target.value,
+    });
   };
+  const handleSavedChange = () => {
+    saveChanges(newEntry);
+  };
+
   return (
     <div className={styles.entry}>
-      <h2 className={styles.title}>{entry.entryDate}</h2>
+      <h2 className={styles.title}>
+        {dayjs(entry.entryDate).format("DD/MM/YYYY")}
+      </h2>
       <p>{entry.event}</p>
       <input
         type="text"
         className={styles.notes}
-        value={entry.notes}
+        value={newEntry.notes}
         onChange={handleChange}
         placeholder="notes"
       />
+      <button className={styles.button} onClick={handleSavedChange}>
+        Save changes
+      </button>
 
       <Image
         src="./trash.svg"
