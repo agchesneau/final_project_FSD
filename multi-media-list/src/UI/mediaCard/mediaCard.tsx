@@ -18,7 +18,7 @@ export default function MediaCard({
   return (
     <div className={styles.imageContainer}>
       <Image
-        src={media.type === "TV" ? TV : media.type === "movie" ? Movie : Book}
+        src={media.type === "tv" ? TV : media.type === "movie" ? Movie : Book}
         alt="placeholder"
         className={styles.image}
         width={400}
